@@ -1,0 +1,26 @@
+{
+  "name": "virtualhappyhour",
+  "version": "1.0.0",
+  "description": "Webapp designed for a interactive party experience with out ever leaving your home",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development ./frontend/src/index.js --output ./static/frontend/virtualhappyhour.js",
+    "build": "webpack --mode production ./frontend/src/index.js --output ./static/frontend/virtualhappyhour.js"
+  },
+  "author": "Naren Makkapati, Paul Clay",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
