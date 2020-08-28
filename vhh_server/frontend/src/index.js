@@ -1,1 +1,1 @@
-import App from './components/VirtualHappyHour';
+import App from './components/VirtualHappyHourApp';
