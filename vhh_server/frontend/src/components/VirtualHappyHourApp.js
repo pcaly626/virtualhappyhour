@@ -10,60 +10,44 @@ class VirtualHappyHourApp extends Component{
                 three:0,
                 four:0
         };
-        this.dragMouseDown = this.dragMouseDown.bind(this)
-        this.dragElement = this.dragElement.bind(this)
-        this.closeDragElement = this.closeDragElement.bind(this)
         this.dragGuest = this.dragGuest.bind(this)
-      }
+    }
     
+    dragGuest(guestId){
+        const guest = document.getElementById(guestId);
+        guest.onmousedown = (event) =>{ 
+            event = event || window.event;
+            event.preventDefault();
+            this.setState({
+                three: event.clientX,
+                four: event.clientY
+            })
 
-     dragElement(event){
-         event = event || window.event;
-         event.preventDefault();
-
-         this.setState({one: this.state.three - event.clientX});
-         this.setState({two: this.state.four - event.clientY});
-         this.setState({three: event.clientX});
-         this.setState({four: event.clientX});
-
-         document.getElementById('guest').style.top = (document.getElementById('guest').offsetTop - this.state.two) + "px";
-         document.getElementById('guest').style.left = (document.getElementById('guest').offsetLeft - this.state.one) + "px";
-
-     }
-
-    closeDragElement(){
-         document.onmouseup = null;
-         document.onmousemove = null;
-     }
-
-    
-    dragGuest(guestDiv){
-        if(document.getElementById(guestDiv.id)){
+            document.onmouseup = () =>{
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
             
-            document.getElementById(guestDiv).onmousedown = this.dragMouseDown();
+            document.onmousemove = (event) =>{    
+                this.setState({
+                    one: this.state.three - event.clientX,
+                    two: this.state.four - event.clientY,
+                    three: event.clientX,
+                    four: event.clientY
+                })
+                guest.style.top = (guest.offsetTop - this.state.two) + "px";
+                guest.style.left = (guest.offsetLeft - this.state.one) + "px";
+
+            }
         }
-        else{
-            guestDiv.onmousedown = this.dragMouseDown();
-        }
-        
     }
-
-    dragMouseDown(event){
-        event = event || window.event;
-        event.preventDefault();
-        this.setState({three: event.clientX})
-        this.setState({four: event.clientY})
-        document.onmouseup = this.closeDragElement();
-        document.onmousedown = this.dragElement();
-    }
-
-
+    
     render(){
         return (
             <div className="container">
                 <div className="row">
                  
-                        <div id="guest" className="guest" onClick={this.dragGuest}></div>
+                        <div id="guest" className="guest" onClick={() => this.dragGuest('guest')}></div>
                    
                     
                 </div>
